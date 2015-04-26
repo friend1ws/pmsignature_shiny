@@ -1,7 +1,16 @@
 library(shiny)
-library(VariantAnnotation)
-library(BSgenome.Hsapiens.UCSC.hg19)
-library(pmsignature)
+library(BH)
+library(ggplot2)
+library(dplyr)
+library(Rcpp)
+library(GenomicRanges)
+library(S4Vectors)
+library(IRanges)
+library(XVector)
+library(Biostrings)
+# library(BSgenome)
+# library(BSgenome.Hsapiens.UCSC.hg19)
+# library(pmsignature)
 
 shinyServer(function(input, output) {
   output$signature <- renderPlot({
