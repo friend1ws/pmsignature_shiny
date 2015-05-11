@@ -10,6 +10,7 @@ library(XVector)
 library(Biostrings)
 # library(BSgenome)
 library(BSgenome.Hsapiens.UCSC.hg19)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 library(pmsignature)
 
 shinyServer(function(input, output) {
