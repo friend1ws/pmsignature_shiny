@@ -21,14 +21,16 @@ shinyServer(function(input, output) {
     # Use isolate() to avoid dependencies
     inFile <- isolate(input$mutFile)
     K <- isolate(input$sigNum)
+    isStrand <- isolate(input$strand)
+    indOrFull <- isolate(input$type)
+    flank <- isolate(input$flank)
+    
     if (is.null(inFile))
       return(NULL)
-
-    print(inFile);
     
     withProgress(message = 'Reading and formating input file', value = 0.2, {
       Sys.sleep(0.1)
-      G <- readMPFile(inFile$datapath, numBases = 5)
+      G <- readMPFile(inFile$datapath, numBases = flank, type = indOrFull, trDir = isStrand)
       incProgress(0.4, message = 'Estimating mutation signatures')
       Sys.sleep(0.1)
       Param <- getPMSignature(G, K, numInit = 1)
@@ -38,20 +40,98 @@ shinyServer(function(input, output) {
   })
   
   
-  output$signature <- renderPlot({
+  # output$signature <- renderPlot({
+  #   
+  #   scaleOrNot <- isolate(input$scale)
+  #   res <- estimationResult();
+  #   if (is.null(res)) {
+  #     return();
+  #   } 
     
+  #   res <- estimationResult();
+  #   Param <- res[[2]];
+  #   par(mfrow = c(2, 3))
+  #   for (i in 1:K) {
+  #     visPMSignature(Param, i, isScale = scaleOrNot)
+  #   }
+  # })
+  
+  output$signature1 <- renderPlot({
     scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
+      res <- estimationResult();
+      if (is.null(res) || K < 1) {
+        return();
+      } 
+    
+      res <- estimationResult();
+      Param <- res[[2]];
+      visPMSignature(Param, 1, isScale = scaleOrNot)
+  })
+  
+  output$signature2 <- renderPlot({
+    scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
     res <- estimationResult();
-    if (is.null(res)) {
+    if (is.null(res) || K < 2) {
       return();
     } 
     
     res <- estimationResult();
     Param <- res[[2]];
-    par(mfrow = c(2, 3))
-    for (i in 1:K) {
-      visPMSignature(Param, i, isScale = scaleOrNot)
-    }
+    visPMSignature(Param, 2, isScale = scaleOrNot)
+  })
+  
+  output$signature3 <- renderPlot({
+    scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
+    res <- estimationResult();
+    if (is.null(res)|| K < 3) {
+      return();
+    } 
+    
+    res <- estimationResult();
+    Param <- res[[2]];
+    visPMSignature(Param, 3, isScale = scaleOrNot)
+  })
+  
+  output$signature4 <- renderPlot({
+    scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
+    res <- estimationResult();
+    if (is.null(res) || K < 4) {
+      return();
+    } 
+    
+    res <- estimationResult();
+    Param <- res[[2]];
+    visPMSignature(Param, 4, isScale = scaleOrNot)
+  })
+  
+  output$signature5 <- renderPlot({
+    scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
+    res <- estimationResult();
+    if (is.null(res) || K < 5) {
+      return();
+    } 
+    
+    res <- estimationResult();
+    Param <- res[[2]];
+    visPMSignature(Param, 5, isScale = scaleOrNot)
+  })
+  
+  output$signature6 <- renderPlot({
+    scaleOrNot <- isolate(input$scale)
+    K <- isolate(input$sigNum)
+    res <- estimationResult();
+    if (is.null(res) || K < 6) {
+      return();
+    } 
+    
+    res <- estimationResult();
+    Param <- res[[2]];
+    visPMSignature(Param, 6, isScale = scaleOrNot)
   })
   
   output$membership <- renderPlot({
