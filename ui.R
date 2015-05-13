@@ -18,7 +18,10 @@ shinyUI(fluidPage(
                      choices = list("independent", "full"), selected = "independent"),
         numericInput("flank", label = "#flanking bases", value = 5, min = 3, max = 5, step = 2),
         checkboxInput("strand", label = "transcription strand", value = FALSE),
-        checkboxInput("scale", label = "scaling flanking bases", value = FALSE),
+        conditionalPanel(
+          condition = "input.type == 'independent'",
+          checkboxInput("scale", label = "scaling heights of flanking bases", value = TRUE)
+        ),
         actionButton("goButton", label = "Execute!")
       )
     ),
