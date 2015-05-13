@@ -13,6 +13,8 @@ library(BSgenome.Hsapiens.UCSC.hg19)
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 library(pmsignature)
 
+
+
 shinyServer(function(input, output) {
   
   estimationResult <- reactive({
@@ -38,6 +40,19 @@ shinyServer(function(input, output) {
     })
     
     return(list(G, Param))
+  })
+  
+  output$sigNumControls <- renderUI({
+  
+    estimationResult();
+    K <- isolate(input$sigNum);
+    if (K >= 4) {
+      fluidRow(
+        column(4, plotOutput('signature4')),
+        column(4, plotOutput('signature5')), 
+        column(4, plotOutput('signature6'))
+      )
+    }
   })
   
   
@@ -148,5 +163,12 @@ shinyServer(function(input, output) {
     visMembership(G, Param);
     
   })
+  
+  outputOptions(output, "sigNumControls", priority = 10);
+  outputOptions(output, "signature1", priority = 5);
+  outputOptions(output, "signature2", priority = 5);
+  outputOptions(output, "signature3", priority = 5);
+  outputOptions(output, "membership", priority = 5);
+  
   
 })

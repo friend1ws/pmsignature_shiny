@@ -1,5 +1,7 @@
 library(shiny)
 
+
+
 shinyUI(fluidPage(
   title = "pmsignture for shiny",
   
@@ -27,14 +29,7 @@ shinyUI(fluidPage(
         column(4, plotOutput('signature2')), 
         column(4, plotOutput('signature3'))
       ),
-      conditionalPanel(
-        condition = "input.sigNum >= 4",
-        fluidRow(
-          column(4, plotOutput('signature4')),
-          column(4, plotOutput('signature5')), 
-          column(4, plotOutput('signature6'))
-        )
-      ),
+      uiOutput("sigNumControls"),
       plotOutput('membership')
     )
     
