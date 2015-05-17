@@ -17,6 +17,15 @@ library(pmsignature)
 
 shinyServer(function(input, output) {
   
+  output$exampleDownload <- downloadHandler(
+    filename = "Nik_Zainal_2012.mutationPositionFormat.txt",
+    content = function(file) {
+      inputFile <- system.file("extdata/Nik_Zainal_2012.mutationPositionFormat.txt", package="pmsignature");
+      inputTable <- read.table(inputFile);
+      write.table(inputTable, file, quote = FALSE, row.names = FALSE, col.names = FALSE, sep="\t")
+    }
+  )
+  
   estimationResult <- reactive({
     # Take a dependency on input$goButton
     input$goButton
@@ -160,7 +169,7 @@ shinyServer(function(input, output) {
     res <- estimationResult();
     G <- res[[1]];
     Param <- res[[2]];
-    visMembership(G, Param);
+    visMembership(G, Param, colourBrewer = "Set2");
     
   })
   
