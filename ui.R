@@ -32,9 +32,12 @@ shinyUI(fluidPage(
       
     column(9,
       fluidRow(
-        column(4, plotOutput('signature1')),
-        column(4, plotOutput('signature2')), 
-        column(4, plotOutput('signature3'))
+        # column(4, plotOutput('signature1')),
+        # column(4, plotOutput('signature2')), 
+        # column(4, plotOutput('signature3'))
+        column(4, imageOutput('signature1')),
+        column(4, imageOutput('signature2')), 
+        column(4, imageOutput('signature3'))
       ),
       uiOutput("sigNumControls"),
       plotOutput('membership')

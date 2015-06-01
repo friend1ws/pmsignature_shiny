@@ -63,91 +63,219 @@ shinyServer(function(input, output) {
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     if (K >= 4) {
       fluidRow(
-        column(4, plotOutput('signature4')),
-        column(4, plotOutput('signature5')), 
-        column(4, plotOutput('signature6'))
+        # column(4, plotOutput('signature4')),
+        # column(4, plotOutput('signature5')), 
+        # column(4, plotOutput('signature6'))
+        column(4, imageOutput('signature4')),
+        column(4, imageOutput('signature5')), 
+        column(4, imageOutput('signature6'))
       )
     }
   })
   
-  
-  output$signature1 <- renderPlot({
+  output$signature1 <- renderImage({
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
     if (is.null(res) || K < 1) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
+    png(outfile, width=400, height=300)
     visPMSignature(Param, 1, isScale = scaleOrNot)
-  })
-  
-  output$signature2 <- renderPlot({
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+    }, deleteFile = TRUE)
+
+  output$signature2 <- renderImage({
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
     if (is.null(res) || K < 2) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    visPMSignature(Param, 2, isScale = scaleOrNot);
-  })
-  
-  output$signature3 <- renderPlot({
-    scaleOrNot <- isolate(input$scale);
+    png(outfile, width=400, height=300)
+    visPMSignature(Param, 2, isScale = scaleOrNot)
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+  }, deleteFile = TRUE)
+
+  output$signature3 <- renderImage({
+    scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res)|| K < 3) {
+    if (is.null(res) || K < 3) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    visPMSignature(Param, 3, isScale = scaleOrNot);
-  })
-  
-  output$signature4 <- renderPlot({
-    scaleOrNot <- isolate(input$scale);
+    png(outfile, width=400, height=300)
+    visPMSignature(Param, 3, isScale = scaleOrNot)
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+  }, deleteFile = TRUE)
+
+  output$signature4 <- renderImage({
+    scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
     if (is.null(res) || K < 4) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    visPMSignature(Param, 4, isScale = scaleOrNot);
-  })
-  
-  output$signature5 <- renderPlot({
-    scaleOrNot <- isolate(input$scale);
+    png(outfile, width=400, height=300)
+    visPMSignature(Param, 4, isScale = scaleOrNot)
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+  }, deleteFile = TRUE)
+
+  output$signature5 <- renderImage({
+    scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 5) {
+    if (is.null(res) || K < 1) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    visPMSignature(Param, 5, isScale = scaleOrNot);
-  })
-  
-  output$signature6 <- renderPlot({
-    scaleOrNot <- isolate(input$scale);
+    png(outfile, width=400, height=300)
+    visPMSignature(Param, 5, isScale = scaleOrNot)
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+  }, deleteFile = TRUE)
+
+  output$signature6 <- renderImage({
+    scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
     if (is.null(res) || K < 6) {
       return();
     } 
-    
+    outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    visPMSignature(Param, 6, isScale = scaleOrNot);
-  })
+    png(outfile, width=400, height=300)
+    visPMSignature(Param, 6, isScale = scaleOrNot)
+    dev.off()
+    
+    list(src = outfile,
+         contentType = 'image/png',
+         width = 400,
+         height = 300,
+         alt = "This is alternate text")
+  }, deleteFile = TRUE)
+  
+#   output$signature1 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale)
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res) || K < 1) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 1, isScale = scaleOrNot)
+#   })
+#   
+#   output$signature2 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale)
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res) || K < 2) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 2, isScale = scaleOrNot);
+#   })
+#   
+#   output$signature3 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale);
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res)|| K < 3) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 3, isScale = scaleOrNot);
+#   })
+#   
+#   output$signature4 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale);
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res) || K < 4) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 4, isScale = scaleOrNot);
+#   })
+#   
+#   output$signature5 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale);
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res) || K < 5) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 5, isScale = scaleOrNot);
+#   })
+#   
+#   output$signature6 <- renderPlot({
+#     scaleOrNot <- isolate(input$scale);
+#     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
+#     res <- estimationResult();
+#     if (is.null(res) || K < 6) {
+#       return();
+#     } 
+#     
+#     res <- estimationResult();
+#     Param <- res[[2]];
+#     visPMSignature(Param, 6, isScale = scaleOrNot);
+#   })
   
   output$membership <- renderPlot({
     
