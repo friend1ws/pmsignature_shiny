@@ -59,32 +59,41 @@ shinyServer(function(input, output) {
   
   output$sigNumControls <- renderUI({
   
-    estimationResult();
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
-    if (K >= 4) {
-      fluidRow(
-        # column(4, plotOutput('signature4')),
-        # column(4, plotOutput('signature5')), 
-        # column(4, plotOutput('signature6'))
-        column(4, imageOutput('signature4')),
-        column(4, imageOutput('signature5')), 
-        column(4, imageOutput('signature6'))
-      )
-    }
+    res <- estimationResult();
+#     if (K >= 4) {
+#       fluidRow(
+#         # column(4, plotOutput('signature4')),
+#         # column(4, plotOutput('signature5')), 
+#         # column(4, plotOutput('signature6'))
+#         column(4, imageOutput('signature4')),
+#         column(4, imageOutput('signature5')), 
+#         column(4, imageOutput('signature6'))
+#       )
+#     }
+    fluidRow(
+      if (!is.null(res) && K >= 1) column(4, imageOutput('signature1')),
+      if (!is.null(res) && K >= 2) column(4, imageOutput('signature2')),  
+      if (!is.null(res) && K >= 3) column(4, imageOutput('signature3')),
+      if (!is.null(res) && K >= 4) column(4, imageOutput('signature4')),
+      if (!is.null(res) && K >= 5) column(4, imageOutput('signature5')),
+      if (!is.null(res) && K >= 6) column(4, imageOutput('signature6'))
+    )
   })
   
   output$signature1 <- renderImage({
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 1) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
+    
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 1, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 1) {
+      visPMSignature(Param, 1, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
@@ -98,14 +107,15 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 2) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
+    
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 2, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 2) {
+      visPMSignature(Param, 2, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
@@ -119,14 +129,15 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 3) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
+    
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 3, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 3) {
+      visPMSignature(Param, 3, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
@@ -140,14 +151,15 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 4) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
+    
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 4, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 4) {
+      visPMSignature(Param, 4, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
@@ -161,14 +173,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 1) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 5, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 5) {
+      visPMSignature(Param, 5, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
@@ -182,14 +194,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-    if (is.null(res) || K < 6) {
-      return();
-    } 
+
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     png(outfile, width=400, height=300)
-    visPMSignature(Param, 6, isScale = scaleOrNot)
+    if (!is.null(res) && K >= 6) {
+      visPMSignature(Param, 6, isScale = scaleOrNot)
+    }
     dev.off()
     
     list(src = outfile,
