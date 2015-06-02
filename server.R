@@ -15,7 +15,7 @@ library(pmsignature)
 
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
   
   output$exampleDownload <- downloadHandler(
     filename = "Nik_Zainal_2012.mutationPositionFormat.txt",
@@ -61,23 +61,14 @@ shinyServer(function(input, output) {
   
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
-#     if (K >= 4) {
-#       fluidRow(
-#         # column(4, plotOutput('signature4')),
-#         # column(4, plotOutput('signature5')), 
-#         # column(4, plotOutput('signature6'))
-#         column(4, imageOutput('signature4')),
-#         column(4, imageOutput('signature5')), 
-#         column(4, imageOutput('signature6'))
-#       )
-#     }
+
     fluidRow(
-      if (!is.null(res) && K >= 1) column(4, imageOutput('signature1')),
-      if (!is.null(res) && K >= 2) column(4, imageOutput('signature2')),  
-      if (!is.null(res) && K >= 3) column(4, imageOutput('signature3')),
-      if (!is.null(res) && K >= 4) column(4, imageOutput('signature4')),
-      if (!is.null(res) && K >= 5) column(4, imageOutput('signature5')),
-      if (!is.null(res) && K >= 6) column(4, imageOutput('signature6'))
+      if (!is.null(res) && K >= 1) column(4, tags$h3("signature1"), imageOutput('signature1')),
+      if (!is.null(res) && K >= 2) column(4, tags$h3("signature2"), imageOutput('signature2')),  
+      if (!is.null(res) && K >= 3) column(4, tags$h3("signature3"), imageOutput('signature3')),
+      if (!is.null(res) && K >= 4) column(4, tags$h3("signature4"), imageOutput('signature4')),
+      if (!is.null(res) && K >= 5) column(4, tags$h3("signature5"), imageOutput('signature5')),
+      if (!is.null(res) && K >= 6) column(4, tags$h3("signature6"), imageOutput('signature6'))
     )
   })
   
@@ -85,12 +76,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature1_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     
-    png(outfile, width=400, height=300)
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 1) {
       visPMSignature(Param, 1, isScale = scaleOrNot)
     }
@@ -98,8 +91,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
     }, deleteFile = TRUE)
 
@@ -107,12 +100,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature2_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     
-    png(outfile, width=400, height=300)
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 2) {
       visPMSignature(Param, 2, isScale = scaleOrNot)
     }
@@ -120,8 +115,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
   }, deleteFile = TRUE)
 
@@ -129,12 +124,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature3_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     
-    png(outfile, width=400, height=300)
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 3) {
       visPMSignature(Param, 3, isScale = scaleOrNot)
     }
@@ -142,8 +139,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
   }, deleteFile = TRUE)
 
@@ -151,12 +148,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature4_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
     
-    png(outfile, width=400, height=300)
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 4) {
       visPMSignature(Param, 4, isScale = scaleOrNot)
     }
@@ -164,8 +163,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
   }, deleteFile = TRUE)
 
@@ -173,11 +172,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature5_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    png(outfile, width=400, height=300)
+    
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 5) {
       visPMSignature(Param, 5, isScale = scaleOrNot)
     }
@@ -185,8 +187,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
   }, deleteFile = TRUE)
 
@@ -194,11 +196,14 @@ shinyServer(function(input, output) {
     scaleOrNot <- isolate(input$scale)
     K <- isolate(input$sigNum) - as.numeric(isolate(input$backGround));
     res <- estimationResult();
+    swidth <- session$clientData$output_signature6_width
 
     outfile <- tempfile(fileext='.png')
     res <- estimationResult();
     Param <- res[[2]];
-    png(outfile, width=400, height=300)
+    
+    png(outfile, width=1600, height=1200, res = 300)
+    par(mar = 0.5 * c(5.1, 4.1, 4.1, 2.1))
     if (!is.null(res) && K >= 6) {
       visPMSignature(Param, 6, isScale = scaleOrNot)
     }
@@ -206,8 +211,8 @@ shinyServer(function(input, output) {
     
     list(src = outfile,
          contentType = 'image/png',
-         width = 400,
-         height = 300,
+         width = swidth,
+         height = swidth * 0.75,
          alt = "This is alternate text")
   }, deleteFile = TRUE)
   
